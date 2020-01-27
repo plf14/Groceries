@@ -25,7 +25,35 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-print(products)
+#print(products)
 # pprint(products)
 
 # TODO: write some Python code here to produce the desired output
+
+print("--------------")
+print("THERE ARE", len(products), "PRODUCTS:")
+print("--------------")
+
+for p in products:
+   print(" +", p["name"], "(" + str(p["price"]) + ")")
+
+departmentsTotal = []
+for p in products:
+    departmentsTotal.append(p["department"])
+departments = list(set(departmentsTotal))
+
+print("--------------")
+print("THERE ARE", len(departments), "DEPARTMENTS:")
+print("--------------")
+
+departments.sort()
+for d in departments:
+    productList = []
+    for p in products:
+        if p["department"] == d:
+            productList.append(p["name"])
+    count = len(productList)
+    if count > 1:
+        print(" +", d.title(), "(" + str(count), "products)")
+    elif count <= 1:
+        print(" +", d.title(), "(" + str(count), "product)")
