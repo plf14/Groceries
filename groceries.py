@@ -25,28 +25,38 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-#print(products)
-# pprint(products)
-
-# TODO: write some Python code here to produce the desired output
+def to_usd(my_price):
+    """
+    Converts a numeric value to usd-formatted string, for printing and display purposes.
+    Source: https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/datatypes/numbers.md#formatting-as-currency
+    Param: my_price (int or float) like 4000.444444
+    Example: to_usd(4000.444444)
+    Returns: $4,000.44
+    """
+    return f"${my_price:,.2f}" #> $12,000.71
 
 print("--------------")
 print("THERE ARE", len(products), "PRODUCTS:")
 print("--------------")
 
-for p in products:
-   print(" +", p["name"], "(" + str(p["price"]) + ")")
+def sortName(p):
+    return p["name"]
+sortedProducts = sorted(products, key = sortName)
+
+for p in sortedProducts:
+   print(" +", p["name"], "(" + to_usd(p["price"]) + ")")
 
 departmentsTotal = []
 for p in products:
     departmentsTotal.append(p["department"])
+
 departments = list(set(departmentsTotal))
+departments.sort()
 
 print("--------------")
 print("THERE ARE", len(departments), "DEPARTMENTS:")
 print("--------------")
 
-departments.sort()
 for d in departments:
     productList = []
     for p in products:
